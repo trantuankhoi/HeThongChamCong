@@ -1,7 +1,9 @@
 <RCC>
   <qresource prefix="16x16">
     <file>icons/16x16/cil-arrow-bottom.png</file>
+    <file>icons/favpng_facial-recognition-system.png</file>
     <file>icons/16x16/cil-arrow-top.png</file>
+    <file>icons/tải xuống.png</file>
     <file>icons/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg</file>
     <file>icons/16x16/cil-size-grip.png</file>
     <file>icons/16x16/cil-3d.png</file>
@@ -252,6 +254,8 @@
     <file>icons/16x16/cil-zoom-out.png</file>
   </qresource>
   <qresource prefix="24x24">
+    <file>icons/images.jpg</file>
+    <file>icons/kisspng-computer-icons-electronic-filter-icon-design-5b3b7fdc2e4e23.8194575515306260121897.png</file>
     <file>icons/24x24/cil-check-alt.png</file>
     <file>icons/24x24/cil-chevron-double-up-alt.png</file>
     <file>icons/24x24/cil-menu.png</file>

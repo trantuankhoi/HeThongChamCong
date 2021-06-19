@@ -59,6 +59,58 @@ border-radius: 30px;</string>
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item alignment="Qt::AlignRight">
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {	
+	background-image: url(:/16x16/icons/16x16/cil-x.png);
+	background-position: center;
+    background-repeat: no-repeat;
+	border: 30px;
+}
+QPushButton:hover {
+	background-color: rgb(248, 131, 121);
+}
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
        <item>
         <widget class="QLabel" name="label_2">
          <property name="font">
@@ -194,7 +246,7 @@ padding-bottom: 7px;</string>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>30</height>
+        <height>40</height>
        </size>
       </property>
       <property name="font">
@@ -207,7 +259,7 @@ padding-bottom: 7px;</string>
 color: #fbedeb;</string>
       </property>
       <property name="text">
-       <string>Đăng nhập thất bại</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -269,7 +321,9 @@ color: #fbedeb;</string>
 }
 
 QPushButton#pushButton:hover {
-	background-color:rgb(117, 12, 26);
+	
+	color: rgb(255, 255, 255);
+	background-color: rgb(153, 0, 0);
 	
 }
 </string>
@@ -307,6 +361,8 @@ border-radius: 30px;</string>
   <zorder>frame_5</zorder>
   <zorder>frame_2</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="files.qrc"/>
+ </resources>
  <connections/>
 </ui>

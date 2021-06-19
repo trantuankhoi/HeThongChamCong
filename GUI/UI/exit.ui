@@ -93,16 +93,6 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
        <property name="bottomMargin">
         <number>0</number>
        </property>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
-         </property>
-         <property name="text">
-          <string>Exit ????</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </item>

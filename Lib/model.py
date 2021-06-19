@@ -5,7 +5,8 @@ from torchvision import datasets
 from torch.utils.data import DataLoader
 from PIL import Image
 import os
-
+import cv2
+import numpy as np
 def detectFace(img, path = True):
     '''
     Hàm phát hiện khuôn mặt từ img và trả về 1 torch.Size([3, 240, 240])
@@ -33,8 +34,8 @@ def collate_fn(x):
     return x[0]
 
 def extractingFolder():
-    dataset = datasets.ImageFolder('Img\Indian-celebrities')
-    index_to_class = os.listdir("Img\Indian-celebrities")
+    dataset = datasets.ImageFolder('Img\\User_Image')
+    index_to_class = os.listdir("Img\\User_Image")
     loader = DataLoader(dataset, collate_fn=collate_fn)
     
     #khởi tạo MTCNN để phát hiện khuôn mặt
@@ -66,9 +67,12 @@ def load_resnet():
 def load_saved_data():
     return torch.load('data.pt')
 
-def face_match(img_path, resnet, saved_data):
+def face_match(img_path, resnet, saved_data, path = True):
     #gọi hàm xác định khuôn mặt
-    img = Image.open(img_path)
+    if path == True:
+        img = Image.open(img_path)
+    else:
+        img = img_path
     face, prob = detectFace(img)
     if face is not None and prob>0.90:
     #trả về một ảnh cắt khuôn mặt và tỉ lệ % độ chính xác
@@ -85,14 +89,47 @@ def face_match(img_path, resnet, saved_data):
     idx_min = dist_list.index(min(dist_list))
     return (name_list[idx_min], min(dist_list)) if min(dist_list) <= 0.9 else -1
 
-#extractingFolder()
+'''extractingFolder()
 
-'''saved_data = load_saved_data()
+saved_data = load_saved_data()
 resnet = load_resnet()
-result = face_match("download.jpg", resnet, saved_data)
+result = face_match("Img\data_test\MV5BMjAwMjk3NDUzN15BMl5BanBnXkFtZTcwNjI4MTY0NA@@._V1_UY1200_CR85,0,630,1200_AL_.jpg", resnet, saved_data)
 
 if result != -1:
     print('Face matched with: ', result[0], 'with distance: ', result[1])
 else:
-    print("No exist")'''
-extractingFolder()
+    print("No exist")
+
+#temp = load_saved_data()
+#print(temp[0][2].shape)
+print(type(saved_data))'''
+
+
+def testAccuracy():
+    data_path = "F:\Projects\HeThongChamCong\Img\data_test"
+    images = os.listdir(data_path)
+    y_test = [1, 1, 5, 1, 1, 2, 4, 4, 3, 3, 5, 5, 5, 5, 5, 5, 5, 1, 1, 4]
+    saved_data = load_saved_data()
+    resnet = load_resnet()
+    y_pre = []
+    count = 0
+    for image in images:
+        path = data_path + "/" + image
+        temp = face_match(path, resnet, saved_data)
+        if temp == -1:
+            y_pre.append(-1)
+            print(path)
+        else:
+            y_pre.append(temp[0])
+    
+    for i in range(len(y_test)):
+        if y_test[i] == int(y_pre[i]):
+            count+=1
+    print(y_pre)
+    print((count/20)*100)
+
+'''img = cv2.imread("Img\data_test\download.jpg")
+print(type(img))
+print(img.shape)
+print(face_match(img, resnet=load_resnet(), saved_data=load_saved_data(), path=False))'''
+#extractingFolder()

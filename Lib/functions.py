@@ -82,7 +82,7 @@ def prepare_for_facematch():
 
 def checkMatch(img, resnet, saved_data):
     print("Checking!")
-    result = model.face_match(img, resnet, saved_data)
+    result = model.face_match(img, resnet, saved_data, path = False)
     if result != -1:
         return result[0]
     else:
@@ -99,4 +99,4 @@ def getTimeSheet():
 #signUp(10, "test", "aasd", "admin", "asd")
 
 '''resnet, saved_data = prepare_for_facematch()
-print(checkMatch("Img\data_test\download.jpg", resnet, saved_data))'''
+print(checkMatch("Img\data_test\MV5BMjAwMjk3NDUzN15BMl5BanBnXkFtZTcwNjI4MTY0NA@@._V1_UY1200_CR85,0,630,1200_AL_.jpg", resnet, saved_data))'''
