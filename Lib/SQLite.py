@@ -340,4 +340,4 @@ insertUser("1", "Trần Tuấn Khôi", "Manager", "Admin", "123")
 insertUser("2", "Trần Dương Long", "Manager", "Admin", "123")
 insertUser("3", "Võ Tấn Văn", "Manager", "Admin", "123")'''
 
-delUser(123)
+#delUser(123)
