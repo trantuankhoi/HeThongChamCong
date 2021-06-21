@@ -13,7 +13,7 @@ import torch
 from PySide2 import QtCore
 from PySide2.QtCore import QTimer, QPropertyAnimation
 from PySide2.QtGui import QImage, QPixmap
-from PySide2.QtWidgets import QApplication, QMainWindow
+from PySide2.QtWidgets import QApplication, QMainWindow, QMessageBox
 from facenet_pytorch import MTCNN
 from matplotlib.pyplot import gray
 from ui_main import Ui_MainWindow
@@ -64,13 +64,16 @@ class UIFunctions(QMainWindow):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
         id = functions.checkMatch(image, resnet, saved_data)
-        print(id)
-        
-        time_keeper.timeKeeping(id, time_keeper.getMonth(), time_keeper.getDate())
+        print(id)        
+        if id != -1:
+            time_keeper.timeKeeping(id, time_keeper.getMonth(), time_keeper.getDate())
 
         qImg = QImage(image.data,  640,480, 1920, QImage.Format_RGB888)
         # show image in img_label
         self.ui.image_label.setPixmap(QPixmap.fromImage(qImg))
+        if showNotice(id):
+            self.timer.stop()
+            self.cap.release()
 
 
     # start/stop timer
@@ -95,6 +98,25 @@ class UIFunctions(QMainWindow):
             self.cap.release()
             # update control_bt text
             self.ui.control_bt.setText("Start")
+
+def showNotice(id):
+    msg = QMessageBox()
+    msg.setWindowTitle("Thông báo")
+    if id == -1:
+        msg.setText("Không trùng khớp khuôn mặt")
+        msg.setIcon(QMessageBox.Warning)   
+    else:
+        name = SQLite.getNameByID(id)
+        text = "Xin chào " + name + "!"
+        msg.setText(text)
+        msg.setIcon(QMessageBox.Information)
+        text1 = "Chấm công vào lúc " + str(time_keeper.getHour()) + " : " + str(time_keeper.getMinute())
+        msg.setDetailedText(text1)
+    msg.setStandardButtons(QMessageBox.Ok)
+    msg.setDefaultButton(QMessageBox.Ok)
+    x = msg.exec_()
+    return True
+
 
 class creat(QMainWindow):
     def lay_data_nv(self):
@@ -226,3 +248,4 @@ class creat(QMainWindow):
 
     def them(self):
         SQLite.insertUser(str(self.ui.txt_ID.text()), str(self.ui.txt_Name.text()), str(self.ui.comboBox_position.currentText()), str(self.ui.comboBox_type.currentText()), str(self.ui.txt_pass1.text()))
+
